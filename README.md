@@ -4,9 +4,9 @@
 
 Budget Buddy is a Smart Finance Assistant built for the ISYS2001 Final Programming Project. It helps users understand their spending habits by analysing transaction data from a CSV file.
 
-The assistant can clean transaction data, summarise spending by category, identify the highest spending areas, provide simple financial recommendations, answer finance-related questions, and calculate savings goals.
+The assistant can clean transaction data, summarise spending by category, identify the highest spending areas, provide simple financial recommendations, answer finance-related questions, and calculate savings goals and just in general make them more financially smart and responsible.
 
-This project is designed to make personal finance easier to understand for students and everyday users.
+This project is designed to make personal finance easier to understand for like students who live off a tight budget and everyday users too.
 
 ---
 
@@ -93,7 +93,7 @@ The notebook includes tests for:
 
 ## AI Collaboration
 
-AI was used as a development assistant throughout the project. It helped with understanding the assignment, creating Python functions, designing the chatbot prompt, creating the RAG-style transaction context, building the Gradio interface, and writing tests.
+AI was used as a development assistant throughout the project. It helped with understanding the assignment, creating Python functions, designing the chatbot prompt, creating the RAG-style transaction context, building the Gradio interface, and writing tests. And helped with just an overview of the code helped fix any errors if it appeared and gave a different perspective to use in the whole assignment.
 
 AI use is documented in `diary.md` and the `ai-conversations` folder.
 
