@@ -1,154 +1,177 @@
-# 📓 Developer's Diary – AI Collaboration Guide
+Developer Diary
+Smart Finance Assistant: Budget Buddy
 
-This file shows sample entries for your **Developer's Diary**. You must document your AI collaboration throughout the project development. Each entry should have:
-- **Artifact**: a screenshot, GIF, or snippet of your AI interaction
-- **Context**: one-sentence description of your goal
-- **Reflection**: analysis of what happened, what you learned, and how you improved the solution
+This diary explains how I used AI while working on my Smart Finance Assistant project. My project is called Budget Buddy. It helps users understand their spending by analysing transaction data from a CSV file. It can clean the data, show spending by category, give simple financial recommendations, answer finance questions, use a savings calculator, and show everything through a Gradio interface.
 
-**Key Principle**: You're directing AI like a junior developer - always review, critique, and improve their suggestions.
+Entry 1 – Understanding the Assignment
 
----
+Artifact: ChatGPT conversation where I asked for help understanding the assignment and the starter notebook.
 
-## Foundation Skills Examples
+Context: I was confused about the whole assignment structure and did not know where to start.
 
-### Entry 1 – Effective AI Prompting for Business Data
-**Artifact:** Screenshot of ChatGPT conversation about analyzing spending data.
+My Prompt: “Explain the Smart Finance Assistant assignment in simple terms and tell me how to start using the starter notebook.”
 
-**My Initial Prompt:** "Help me analyze CSV data with pandas"
+AI Response Summary: AI explained that the starter notebook was not a finished project, but a template that I had to edit and fill in. It explained that I should use the notebook as the main assignment file and complete it step by step.
 
-**My Improved Prompt:** "I'm building a Smart Finance Assistant. I have a CSV with Date, Amount, Category, Description columns. The Amount has dollar signs that need cleaning. I want to calculate total spending by category and format results for a business presentation. Please write pandas code with clear comments."
+My Critique/Improvement: I asked AI to explain it more simply because I was overwhelmed by the notebook, GitHub, README, diary, and all the different sections.
 
-**Context:** Learning to write specific, business-focused AI prompts.
+Result: I understood that I did not need to create everything from scratch. I had to work inside the starter notebook, replace the empty parts, and build the project slowly.
 
-**Reflection:** The first prompt gave me generic pandas code. The improved prompt with business context got me professional, commented code that handled data cleaning. I learned that AI needs clear business context and output requirements to give useful results. Now I always include: data structure, business purpose, and desired output format.
+Reflection: This helped me because before this I was looking at the assignment as one huge confusing task. After breaking it down, I understood that the project is made of smaller parts that connect together.
 
----
+Entry 2 – Planning the Finance Problem
 
-### Entry 2 – Critiquing and Improving AI Code
-**Artifact:** Before/after screenshots of AI-generated spending analysis code.
+Artifact: ChatGPT conversation where I asked for help with the six-step methodology.
 
-**Context:** AI gave me complex code that was hard to understand for my transaction analysis.
+Context: I needed help writing the planning sections before coding, like the problem statement, inputs and outputs, manual example, and pseudocode.
 
-**AI's First Response:**
-```python
-df.groupby('Category')['Amount'].agg({'sum','mean','count'}).round(2)
-```
+My Prompt: “Help me write the six-step methodology sections for a Smart Finance Assistant that analyses transaction CSV data.”
 
-**My Critique:** "This code is unclear and doesn't handle dollar signs. Can you make it more readable with business-friendly variable names and add data cleaning?"
+AI Response Summary: AI helped me write a simple finance problem, explain the inputs and outputs, create a manual example, and write pseudocode for how the project should work.
 
-**AI's Improved Response:**
-```python
-# Clean amount data by removing dollar signs
-df['Amount_Clean'] = pd.to_numeric(df['Amount'].str.replace('$', ''), errors='coerce')
+My Critique/Improvement: I changed some of the wording so it sounded more like my own explanation and matched my project idea better.
 
-# Calculate spending metrics by category
-spending_summary = df.groupby('Category')['Amount_Clean'].agg({
-    'Total_Spent': 'sum',
-    'Average_Amount': 'mean', 
-    'Transaction_Count': 'count'
-}).round(2)
-```
+Result: I added the planning sections into the notebook. These sections explain that Budget Buddy helps users understand spending habits by analysing CSV transaction data.
 
-**Reflection:** I learned that AI's first response isn't always the best. By asking for clearer variable names and business context, I got much better code. This taught me to always review AI code and ask for improvements rather than accepting the first solution.
+Reflection: I learned that planning the logic in normal English before coding makes the project easier. It helped me understand what the code was supposed to do before I started writing functions.
 
----
+Entry 3 – Loading and Cleaning Transaction Data
 
-### Entry 3 – Business Context in AI Interactions
-**Artifact:** Screenshot of Gemini generating financial insights from data.
+Artifact: Code snippet from the load_and_clean_transaction_data() function.
 
-**Context:** I wanted AI to help generate business recommendations from spending analysis.
+Context: I needed to create a function that loads a CSV file and cleans the transaction data.
 
-**My Prompt:** "Based on this spending analysis showing Groceries: $450, Dining: $380, Coffee: $120, Transport: $95, create business insights and savings recommendations that sound professional for a personal finance app."
+My Prompt: “Help me write a Python function that loads transaction CSV data, checks required columns, removes dollar signs from Amount, converts values to numbers, converts Date values, and handles missing data.”
 
-**AI Response:** Generated specific recommendations like "Consider meal planning to reduce dining expenses" and "Coffee purchases represent 8% of total spending - consider brewing at home."
+AI Response Summary: AI helped create a pandas function that reads the CSV file, checks if the required columns exist, removes dollar signs from the Amount column, converts Amount to numbers, converts Date values, and removes invalid rows.
 
-**Reflection:** When I include business context and specify the audience (personal finance app users), AI generates much more relevant and professional output. I learned that framing requests in business terms gets business-quality responses. Now I always think about who will read the output and what decisions they need to make.
+My Critique/Improvement: When I tested the function, I got an error because df_sample was not defined. I asked for help and fixed it by creating the sample data inside the test cell.
 
----
+Result: The function worked and printed a cleaned table. The Amount column changed from text like $45.50 into proper number values.
 
-### Entry 4 – Data Quality and Edge Cases
-**Artifact:** Screenshot of debugging session with Claude about handling messy CSV data.
+Reflection: I learned that raw data is not always ready to use. It has to be cleaned before analysis. I also learned that checking columns is important because the program should handle wrong files properly.
 
-**Context:** My CSV had negative amounts (refunds) and missing values that broke my calculations.
+Entry 4 – Spending Analysis Function
 
-**My Problem:** "My spending analysis is giving wrong totals because some amounts are negative (refunds) and some cells are empty."
+Artifact: Code snippet from the analyze_spending_patterns() function.
 
-**AI Solution:** Helped me add data validation:
-```python
-# Handle refunds and missing data appropriately
-df_clean = df.dropna(subset=['Amount_Clean'])
-positive_spending = df_clean[df_clean['Amount_Clean'] > 0]
-refunds = df_clean[df_clean['Amount_Clean'] < 0]
-```
+Context: I needed to analyse the cleaned transaction data and calculate useful spending information.
 
-**Reflection:** AI helped me think about real-world data issues I hadn't considered. I learned that business data is always messy and I need to ask AI specifically about edge cases like refunds, missing values, and invalid entries. This makes my finance assistant more robust for actual use.
+My Prompt: “Help me create a function that analyses spending by category, calculates total spending, average transaction amount, category percentages, and identifies the top spending category.”
 
----
+AI Response Summary: AI helped create a function that uses pandas to calculate total spending, average transaction amount, spending by category, category percentages, and the highest spending category.
 
-## Advanced Integration Examples
+My Critique/Improvement: I kept the part where it only counts positive amounts for spending analysis, because refunds and negative values should not be counted as normal spending.
 
-### Entry 5 – Combining Multiple AI Tools
-**Artifact:** Screenshot showing integration of hands-on-ai chat with pandas analysis.
+Result: The function worked and showed total spending, average transaction amount, top category, category totals, and category percentages.
 
-**Context:** I wanted to create a chatbot that could answer questions about spending data.
+Reflection: I learned that pandas groupby() is useful for summarising data by category. It made the spending analysis much easier than manually going through every transaction.
 
-**My Approach:** Used AI to help me combine CSV analysis with hands-on-ai chat functionality.
+Entry 5 – Financial Recommendations
 
-**Key Learning:** AI helped me structure the integration, but I had to understand the business logic to make it useful. The chatbot needed to understand financial concepts, not just execute code.
+Artifact: Code snippet from the generate_financial_recommendations() function.
 
-**Reflection:** Integrating multiple technologies requires understanding how each piece serves the business purpose. AI can generate technical integration code, but I need to guide it toward business value.
+Context: I wanted the assistant to turn the spending analysis into simple advice that a user could understand.
 
----
+My Prompt: “Help me create a business insights function that turns spending analysis results into simple financial recommendations for a personal finance app user.”
 
-### Entry 6 – Professional Error Handling
-**Artifact:** Code snippet showing error handling for file uploads.
+AI Response Summary: AI helped create a function that formats the spending analysis into a readable report. It includes total spending, average transaction amount, spending breakdown, highest category, and a recommendation.
 
-**Context:** I needed my Gradio interface to handle bad CSV files gracefully.
+My Critique/Improvement: I checked that the advice was based on the actual analysis results and not just random general finance advice.
 
-**AI Suggestion:** Generated try/catch blocks with business-appropriate error messages:
-```python
-try:
-    df = pd.read_csv(file.name)
-    # Analysis code...
-except FileNotFoundError:
-    return "Please upload a valid CSV file."
-except pd.errors.EmptyDataError:
-    return "The uploaded file appears to be empty. Please check your data."
-```
+Result: The function created a financial recommendations report based on the user’s spending data.
 
-**Reflection:** AI helped me think about user experience, not just technical functionality. Good error messages help users understand what went wrong and how to fix it. This is crucial for business applications.
+Reflection: I learned that showing numbers is not enough. A finance assistant should explain what the numbers mean and give the user something useful to think about.
 
----
+Entry 6 – Hands-on-AI Chatbot Setup
 
-## AI Collaboration Best Practices I've Learned
+Artifact: Code snippet showing the Hands-on-AI connection and chatbot response.
 
-### 🎯 Effective Prompting Strategies
-1. **Always provide business context**: "I'm building a finance assistant for..."
-2. **Specify data structure**: "My CSV has columns X, Y, Z with these data types..."  
-3. **Request professional formatting**: "Format output for business presentation"
-4. **Ask for comments**: "Include clear comments explaining the business logic"
+Context: I needed to connect the notebook to the AI server and create a finance chatbot personality.
 
-### 🤔 Critique Questions I Always Ask
-- "Does this handle edge cases like negative amounts or missing data?"
-- "Are the variable names clear for a business context?"
-- "How would I explain this code to a non-technical manager?"
-- "What assumptions is this code making about my data?"
+My Prompt: “Help me create a friendly finance chatbot personality that gives simple educational advice based on transaction analysis.”
 
-### 🔄 Iterative Improvement Process
-1. **Get basic working code** from AI
-2. **Test with real data** and find issues  
-3. **Ask AI to fix specific problems** with context
-4. **Simplify complex solutions** for maintainability
-5. **Add business-appropriate formatting** and error handling
+AI Response Summary: AI helped create a chatbot function using get_response(). The chatbot was given a Budget Buddy personality and was told to give simple financial advice.
 
-### 📊 Business Value Focus
-- Always connect code back to business decisions
-- Format outputs for non-technical users
-- Include actionable insights, not just data summaries
-- Consider the end user's needs and context
+My Critique/Improvement: At first, the AI connection did not work because the server, model, and key were wrong. I compared it with my friend’s working setup and changed the settings.
 
----
+Result: The chatbot worked and answered a finance question using the spending recommendations.
 
+Reflection: I learned that AI tools need the correct server, model, and API key to work. I also learned that the prompt controls how the chatbot behaves and what kind of answer it gives.
+
+Entry 7 – RAG-Style Transaction Context
+
+Artifact: Code snippet from the setup_financial_rag() function.
+
+Context: I needed to add a RAG-style feature so the chatbot could use transaction data when answering questions.
+
+My Prompt: “Help me create a simple RAG-style function that retrieves transaction context from spending analysis and uses it to answer user finance questions.”
+
+AI Response Summary: AI explained that I could use the spending recommendations as the retrieved context. The function creates an analysis from the transaction data and includes that information in the AI prompt.
+
+My Critique/Improvement: I kept the RAG system simple because I did not want to overcomplicate it with a full document database. I used the transaction summary as the retrieved information.
+
+Result: The chatbot could answer a finance question using the user’s transaction summary as context.
+
+Reflection: I learned that RAG basically means giving AI useful information before asking it to answer. In my project, the useful information is the user’s spending summary.
+
+Entry 8 – Custom Savings Goal Tool
+
+Artifact: Code snippet from the savings_goal_calculator() function.
+
+Context: I needed to add one custom financial tool for the project.
+
+My Prompt: “Create a savings goal calculator function that takes current savings, target amount, and monthly contribution, then calculates time to reach the goal.”
+
+AI Response Summary: AI helped create a savings calculator that checks the user’s inputs and calculates how many months it will take to reach a target savings amount.
+
+My Critique/Improvement: I included checks for negative savings, zero monthly contribution, and cases where the savings goal has already been reached.
+
+Result: The savings calculator worked and correctly calculated that saving from $500 to $2000 with $250 per month would take about 6 months.
+
+Reflection: I learned that a custom tool does not have to be complicated. It can be a simple Python function that solves one useful finance problem.
+
+Entry 9 – Gradio User Interface
+
+Artifact: Screenshot or code snippet of the Gradio interface running in the notebook.
+
+Context: I needed to create a simple app interface so the assistant could be used without manually running every code cell.
+
+My Prompt: “Help me design a Gradio interface that combines CSV upload, spending analysis, finance questions, and a savings calculator.”
+
+AI Response Summary: AI helped create a Gradio interface with a CSV upload, finance question box, savings inputs, and an output area.
+
+My Critique/Improvement: I tested it by uploading a CSV file and checking that it showed the spending analysis, savings result, and chatbot response.
+
+Result: The Gradio interface worked and made the project feel like a simple finance app.
+
+Reflection: I learned that Gradio is useful because it turns Python code into an interface that normal users can interact with more easily.
+
+Entry 10 – Testing and Integration
+
+Artifact: Code snippets showing the foundation tests and integration tests.
+
+Context: I needed to test that the finance assistant worked properly with normal data and also handled bad data.
+
+My Prompt: “Help me create tests for normal transaction data, refunds, missing values, invalid columns, savings calculator inputs, and full workflow integration.”
+
+AI Response Summary: AI helped create tests using assert statements. The tests checked normal transaction data, refund values, missing values, invalid columns, the savings calculator, no file upload, and the full workflow.
+
+My Critique/Improvement: I ran the tests and checked that the basic tests and integration tests passed. I also checked that invalid columns produced an error message instead of breaking the whole notebook.
+
+Result: The tests passed and showed that the main functions and full workflow were working.
+
+Reflection: I learned that testing is important because it proves the program works in different situations. It also helped me feel more confident that the assistant was not just working for one perfect example.
+
+Overall Reflection
+
+AI helped me build the Smart Finance Assistant step by step. The most useful part was that AI helped me break the project into smaller pieces instead of trying to understand everything at once.
+
+I used AI to help understand the assignment, plan the notebook, write pandas functions, create recommendations, fix errors, set up the chatbot, create a RAG-style function, build the savings calculator, make the Gradio interface, and write tests.
+
+I learned that AI can help generate code and explain ideas, but I still need to test the code and make sure it actually works for my project. The main challenge was understanding how all the parts connected together. Once I broke the project into smaller sections, it became much easier to complete.
+
+This project helped me practise Python functions, pandas data processing, AI prompting, RAG-style context, custom financial tools, Gradio interface design, and testing.
 ## 📝 Documentation Template for Your Entries
 
 Use this format for consistent diary entries:
