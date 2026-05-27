@@ -172,28 +172,3 @@ I used AI to help understand the assignment, plan the notebook, write pandas fun
 I learned that AI can help generate code and explain ideas, but I still need to test the code and make sure it actually works for my project. The main challenge was understanding how all the parts connected together. Once I broke the project into smaller sections, it became much easier to complete.
 
 This project helped me practise Python functions, pandas data processing, AI prompting, RAG-style context, custom financial tools, Gradio interface design, and testing.
-## 📝 Documentation Template for Your Entries
-
-Use this format for consistent diary entries:
-
-```markdown
-### Entry [Number] – [Descriptive Title]
-**Artifact:** [Screenshot/code snippet/GIF of AI interaction]
-
-**Context:** [One sentence: what you were trying to achieve]
-
-**My Prompt:** "[Your exact prompt to AI]"
-
-**AI Response Summary:** [Brief description of what AI provided]
-
-**My Critique/Improvement:** [How you modified or improved the AI's suggestion]
-
-**Result:** [What you ended up with and why it's better]
-
-**Reflection:** [What you learned about AI collaboration, business programming, or problem-solving]
-```
-
----
-
-✅ **Remember**: Document your AI collaboration throughout your project development. Each entry should show learning and improvement, not just successful interactions. Show how you direct AI like a junior developer to create business-appropriate solutions.
-
